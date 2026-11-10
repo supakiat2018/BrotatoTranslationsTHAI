@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ม็อดภาษาไทยเกม Brotato (Brotato Thai Translation) v1.2.0.1</title>
+  <meta name="description" content="ม็อดแปลภาษาไทยสมบูรณ์แบบสำหรับเกม Brotato เวอร์ชัน 1.2.0.1 รองรับตัวเกมหลัก, DLC Abyssal Terrors และ DLC Primal Dread พร้อมฟอนต์ภาษาไทย PUA คมชัด" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c12;
+      --bg-elevated: #121622;
+      --card: rgba(20, 25, 38, 0.78);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(245, 158, 11, 0.45);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #f59e0b;
+      --accent-light: #fbbf24;
+      --steam: #4ade80;
+      --steam-dark: #16a34a;
+      --cyan: #22d3ee;
+      --crimson: #fb7185;
+      --radius: 18px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Noto Sans Thai", system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(245, 158, 11, 0.14), transparent 38%),
+        radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.10), transparent 36%),
+        radial-gradient(circle at 50% 85%, rgba(251, 113, 133, 0.09), transparent 42%);
+    }
+
+    /* Subtle grid overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 90%);
+      z-index: -1;
+    }
+
+    h1, h2, h3, .font-display {
+      font-family: "Kanit", "Noto Sans Thai", sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(10, 12, 18, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 700;
+      font-size: 1.08rem;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(245, 158, 11, 0.08));
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      font-size: 1.25rem;
+    }
+
+    .version-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.16rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.16);
+      color: var(--accent-light);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #052e16;
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.25);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 5.2rem 0 3.6rem;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.32);
+      color: var(--accent-light);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.8vw, 3.55rem);
+      line-height: 1.18;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      background: linear-gradient(135deg, #ffffff 30%, #fde68a 75%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subname {
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-desc {
+      max-width: 740px;
+      margin: 0 auto 2.1rem;
+      color: #d1d5db;
+      font-size: 1.07rem;
+    }
+
+    .hero-desc strong {
+      color: #fff;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.9rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.88rem 1.55rem;
+      border-radius: 13px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4ade80, #16a34a);
+      color: #052e16;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(34, 197, 94, 0.38);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.14);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateY(-2px);
+    }
+
+    /* Quick stats bar */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.05rem 1.2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-family: "Kanit", "Noto Sans Thai", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .stat-value.accent { color: var(--accent-light); }
+    .stat-value.green { color: var(--steam); }
+
+    /* Sections */
+    section {
+      padding: 3.4rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    /* DLC Support Cards */
+    .dlc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .dlc-card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.65rem;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .dlc-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-border-hover);
+    }
+
+    .dlc-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .dlc-card.abyssal::after {
+      background: linear-gradient(90deg, var(--cyan), transparent);
+    }
+
+    .dlc-card.primal::after {
+      background: linear-gradient(90deg, var(--crimson), transparent);
+    }
+
+    .dlc-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+      background: rgba(245, 158, 11, 0.14);
+      color: var(--accent-light);
+    }
+
+    .dlc-card.abyssal .dlc-tag {
+      background: rgba(34, 211, 238, 0.14);
+      color: var(--cyan);
+    }
+
+    .dlc-card.primal .dlc-tag {
+      background: rgba(251, 113, 133, 0.14);
+      color: var(--crimson);
+    }
+
+    .dlc-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .dlc-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      display: flex;
+      gap: 1.1rem;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.55rem;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .feature-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* How to Use Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.15rem;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.35rem;
+      position: relative;
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-family: "Kanit", sans-serif;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), #d97706);
+      color: #111827;
+      margin-bottom: 1rem;
+    }
+
+    .step-card h3 {
+      font-size: 1.06rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .step-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .kbd-path {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fde68a;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    /* Tip Box */
+    .tip-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(20, 25, 38, 0.88));
+      border: 1px solid rgba(245, 158, 11, 0.34);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.7rem;
+      box-shadow: var(--shadow);
+    }
+
+    .tip-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .tip-box h3 {
+      font-size: 1.15rem;
+      color: var(--accent-light);
+      margin-bottom: 0.35rem;
+    }
+
+    .tip-box p {
+      color: #e5e7eb;
+      font-size: 0.97rem;
+    }
+
+    .code-inline {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.12rem 0.45rem;
+      border-radius: 6px;
+      color: #fde68a;
+      font-size: 0.9em;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2.2rem 0 2.8rem;
+      margin-top: 2rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #16a34a;
+      color: #fff;
+      padding: 0.7rem 1.1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 920px) {
+      .stats-grid,
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .dlc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding: 3.6rem 0 2.5rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#" class="brand">
+        <span class="brand-icon">🥔</span>
+        <span>Brotato Thai</span>
+        <span class="version-pill">v1.2.0.1</span>
+      </a>
+      <nav class="nav-links" aria-label="เมนูหลัก">
+        <a href="#dlc">เนื้อหาที่รองรับ</a>
+        <a href="#features">คุณสมบัติเด่น</a>
+        <a href="#how-to-use">วิธีใช้งาน</a>
+        <a href="#tips">คำแนะนำ</a>
+      </nav>
+      <a
+        class="nav-cta"
+        href="https://steamcommunity.com/sharedfiles/filedetails/?id=3790183731"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Steam Workshop ↗
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">✨ เวอร์ชัน 1.2.0.1 • แปลครบสมบูรณ์ 100%</div>
+        <h1>🥔 ม็อดภาษาไทยเกม Brotato</h1>
+        <p class="hero-subname">Brotato Thai Translation (<span class="code-inline">BrotatoTranslationsTHAI</span>)</p>
+        <p class="hero-desc">
+          ม็อดแปลภาษาไทยสมบูรณ์แบบสำหรับเกม <strong>Brotato</strong> รองรับทั้งตัวเกมหลัก (<strong>เวอร์ชัน 1.2.0.1</strong>),
+          <strong>DLC Abyssal Terrors</strong> และ <strong>DLC Primal Dread</strong> แปลครบทั้งหมด!
+          มาพร้อมระบบฟอนต์ภาษาไทย PUA คมชัด สระและวรรณยุกต์จัดตำแหน่งถูกต้อง ไม่ซ้อนทับกัน 100%
+        </p>
+
+        <div class="hero-actions">
+          <a
+            class="btn btn-primary"
+            href="https://steamcommunity.com/sharedfiles/filedetails/?id=3790183731"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📥 Subscribe บน Steam Workshop
+          </a>
+          <a class="btn btn-secondary" href="#how-to-use">
+            📖 วิธีการใช้งาน
+          </a>
+          <button class="btn btn-secondary" type="button" id="copyWorkshopBtn">
+            🔗 คัดลอกลิงก์ม็อด
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">เวอร์ชันปัจจุบัน</div>
+            <div class="stat-value accent">v1.2.0.1</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">ความครอบคลุม</div>
+            <div class="stat-value">เกมหลัก + 2 DLC ครบ</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">ระบบฟอนต์</div>
+            <div class="stat-value">PUA คมชัด ไม่ลอย</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">การติดตั้ง</div>
+            <div class="stat-value green">Steam Workshop Native</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported Content / DLC -->
+    <section id="dlc">
+      <div class="container">
+        <div class="section-header">
+          <h2>📦 เนื้อหาที่แปลครบสมบูรณ์</h2>
+          <p>อัปเดตสำหรับเวอร์ชัน 1.2.0.1 แปลครบถ้วนทั้งตัวเกมหลักและส่วนเสริมทั้งหมด</p>
+        </div>
+        <div class="dlc-grid">
+          <article class="dlc-card">
+            <span class="dlc-tag">🥔 Base Game v1.2.0.1</span>
+            <h3>ตัวเกมหลัก Brotato</h3>
+            <p>แปลครบทุกตัวละคร อาวุธ ไอเทม คุณสมบัติพิเศษ หน้าต่างเมนู และคำอธิบายเอฟเฟกต์ทั้งหมดในเวอร์ชันล่าสุด</p>
+          </article>
+          <article class="dlc-card abyssal">
+            <span class="dlc-tag">🏝️ DLC #1</span>
+            <h3>Abyssal Terrors</h3>
+            <p>แปลครบสมบูรณ์ทั้งตัวละคร อาวุธ ไอเทม ศัตรู ด่าน และระบบการเล่นใหม่ทั้งหมดของ DLC Abyssal Terrors</p>
+          </article>
+          <article class="dlc-card primal">
+            <span class="dlc-tag">🔥 DLC #2</span>
+            <h3>Primal Dread</h3>
+            <p>อัปเดตแปลครบถ้วนสำหรับ DLC Primal Dread ทั้งเนื้อหา ตัวละคร อาวุธ ไอเทม และระบบใหม่แบบจัดเต็ม</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>✨ คุณสมบัติเด่น (Features)</h2>
+          <p>ออกแบบให้ติดตั้งง่าย อ่านสบายตา และอัปเดตตามตัวเกมได้ทันที</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <div>
+              <h3>100% Steam Workshop Native</h3>
+              <p>กด Subscribe แล้วเข้าเล่นได้ทันที ไม่ต้องดาวน์โหลดหรือรันตัวติดตั้งภายนอกใดๆ เพิ่มเติม</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🏝️</div>
+            <div>
+              <h3>รองรับครบทั้ง Abyssal Terrors &amp; Primal Dread</h3>
+              <p>แปลครบทั้งตัวละคร อาวุธ ไอเทม และระบบใหม่ของทุก DLC แบบครบสมบูรณ์ในม็อดเดียว</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔤</div>
+            <div>
+              <h3>ฟอนต์ภาษาไทย PUA คมชัด</h3>
+              <p>จัดตำแหน่งสระบน-ล่างและวรรณยุกต์อย่างถูกต้อง ไม่ลอย ไม่ซ้อนทับกัน อ่านง่ายชัดเจน 100%</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔄</div>
+            <div>
+              <h3>อัปเดตอัตโนมัติ</h3>
+              <p>รองรับการอัปเดตเวอร์ชันใหม่ผ่าน Steam Workshop ได้ทันทีโดยไม่ต้องลงไฟล์ซ้ำด้วยตัวเอง</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use -->
+    <section id="how-to-use">
+      <div class="container">
+        <div class="section-header">
+          <h2>📥 วิธีการใช้งาน (How to Use)</h2>
+          <p>ติดตั้งง่ายใน 4 ขั้นตอน ใช้เวลาไม่ถึง 1 นาที</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <h3>กด Subscribe ม็อด</h3>
+            <p>เข้าไปที่หน้า Steam Workshop แล้วกดปุ่ม <strong>Subscribe (สมัครสมาชิก)</strong> สีเขียว</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <h3>เปิดเกม Brotato</h3>
+            <p>รอ Steam ดาวน์โหลดม็อดเสร็จสิ้น แล้วกดเข้าเกมตามปกติ</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <h3>เปลี่ยนภาษาในเกม</h3>
+            <p>เข้าไปเลือกภาษาไทยที่เมนู:</p>
+            <span class="kbd-path">Options ➔ Language ➔ ภาษาไทย</span>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <h3>เริ่มเล่นได้เลย!</h3>
+            <p>เมนูและคำอธิบายทั้งหมดจะเปลี่ยนเป็นภาษาไทยพร้อมลุยทันที</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tip -->
+    <section id="tips">
+      <div class="container">
+        <div class="tip-box">
+          <div class="tip-icon">💡</div>
+          <div>
+            <h3>คำแนะนำเพิ่มเติม</h3>
+            <p>
+              หากเข้าเกมแล้วภาษาไทยยังไม่แสดง ให้ตรวจสอบในเมนู <strong>Modifications (ม็อด)</strong>
+              ในหน้าหลักของเกมว่าม็อด <span class="code-inline">BrotatoTranslationsTHAI</span> เปิดทำงานอยู่ (<strong>Active</strong>) หรือไม่
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>🥔 <strong>BrotatoTranslationsTHAI</strong> • เวอร์ชัน 1.2.0.1</div>
+      <div class="footer-links">
+        <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3790183731" target="_blank" rel="noopener noreferrer">Steam Workshop</a>
+        <a href="https://github.com/supakiat2018/BrotatoTranslationsTHAI" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">คัดลอกลิงก์ Steam Workshop แล้ว!</div>
+
+  <script>
+    const copyBtn = document.getElementById("copyWorkshopBtn");
+    const toast = document.getElementById("toast");
+    const workshopUrl = "https://steamcommunity.com/sharedfiles/filedetails/?id=3790183731";
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(workshopUrl);
+        toast.textContent = "คัดลอกลิงก์ Steam Workshop แล้ว!";
+      } catch {
+        toast.textContent = workshopUrl;
+      }
+      toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    });
+  </script>
+</body>
+</html>
